@@ -1,60 +1,85 @@
 <template>
-  <v-app>
-    <v-app-bar
+  <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
       app
-      color="primary"
-      dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="text-h6">
+            Nome do usuário
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            Nivel de acesso do usuário
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <v-divider></v-divider>
 
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+      <v-list
+        dense
+        nav
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+              <v-list-item-title>
+                <router-link :to="item.view">
+                  {{ item.title }}
+                </router-link>
+              </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Pagina Principal</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+<!-- main page -->
+<router-view/>
     </v-main>
+    <v-footer padless>
+    <v-col
+      class="text-center"
+      cols="12"
+    >
+      {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+    </v-col>
+  </v-footer>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
 
 export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
   data: () => ({
-    //
-  }),
-};
+    drawer: null,
+    attrs: {
+      class: 'mb-6',
+      boilerplate: true,
+      elevation: 2,
+    },
+    items: [
+      { title: 'Dashboard', icon: 'mdi-view-dashboard', view: '/' },
+      { title: 'Tansações', icon: 'mdi-magnify', view: '/viewAction' },
+      { title: 'Calendário', icon: 'mdi-calendar', view: './viewCalendar' },
+      { title: 'Ferramentas', icon: 'mdi-tools', view: './viewTools' },
+      { title: 'Configurações', icon: 'mdi-cog', view: './viewConfig' },
+      { title: 'About', icon: 'mdi-help-box', view: './viewAbout' },
+    ],
+  })
+}
 </script>
