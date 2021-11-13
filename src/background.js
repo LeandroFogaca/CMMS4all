@@ -1,11 +1,11 @@
 import { app, protocol, BrowserWindow } from 'electron';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
-
-import './backend/index';
-
+import '../src/backend/index';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
+
+var path = require('path');
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -25,6 +25,8 @@ async function createWindow() {
       // #node-integration for more info
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      enableRemoteModule: true,
+      preload: path.join(__dirname, './preload.js'),
     },
   });
 
