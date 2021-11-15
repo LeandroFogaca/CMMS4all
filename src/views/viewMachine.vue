@@ -2,7 +2,7 @@
 <template>
   <v-card>
     <v-card-title>
-     <v-btn @click="addmachine">
+     <v-btn @click="newmachine">
          Novo Equipamentos
      </v-btn>
       <v-spacer></v-spacer>
@@ -24,6 +24,8 @@
 
 <script>
 const { ipcRenderer } = require('electron')
+
+
 
   export default {
     data () {
@@ -127,14 +129,14 @@ const { ipcRenderer } = require('electron')
       }
     },
     methods: {
-      addmachine() {
-        console.log("botão adicionar equipamento");
+      newmachine() {
+        // console.log("botão adicionar equipamento");
           ipcRenderer.send('tobackend', 'Ping');
-        ipcRenderer.on('tobackend', (e,resp) => {
+          ipcRenderer.on('tobackend', (e,resp) => {
           console.log(resp);
         })
 
-    
+      window.open()
 
       }
     },
