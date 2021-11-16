@@ -1,12 +1,19 @@
 <template>
   <v-app>
-    <div id="TheHeader">
+
       <TheHeader></TheHeader>
-    </div>
+    
+      <TheSideBar/>
+
     <v-main>
      
 <!-- main page -->
-<!-- <router-view/> -->
+
+    
+    
+    
+    
+    
     </v-main>
     <div id="TheFooter">
       <TheFooter></TheFooter>
@@ -17,7 +24,8 @@
 <script>
 
 import TheFooter from './components/TheFooter.vue'
-import TheHeader from "./components/TheHeader.vue";
+import TheHeader from "./components/TheHeader.vue"
+import TheSideBar from "./components/TheSideBar";
 
 
 
@@ -26,6 +34,7 @@ export default {
   components: { 
     TheFooter,
     TheHeader,
+    TheSideBar
   },
   data: () => ({
     attrs: {
