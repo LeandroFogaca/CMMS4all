@@ -3,6 +3,7 @@
         permanent
         expand-on-hover
         app
+        clipped
       >
         <!-- <v-list>
           <v-list-item link>
