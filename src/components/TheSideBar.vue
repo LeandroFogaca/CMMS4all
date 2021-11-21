@@ -1,10 +1,10 @@
 <template>
-  <div>
       <v-navigation-drawer
         permanent
         expand-on-hover
+        app
       >
-        <v-list>
+        <!-- <v-list>
           <v-list-item link>
             <v-list-item-content>
               <v-list-item-title class="text-h6">
@@ -15,7 +15,7 @@
           </v-list-item>
         </v-list>
 
-        <v-divider></v-divider>
+        <v-divider></v-divider> -->
 
         <v-list
           nav
@@ -25,7 +25,8 @@
           v-for="item in items"
           :key="item.title"
           link
-        >
+          v-on:click="$emit('currentView', item.view); $router.push(item.view)"
+          >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -33,13 +34,14 @@
           <v-list-item-content>
               <v-list-item-title>
                   {{ item.title }}
+                <!-- <router-link :to="item.view">
+                  </router-link> -->
                 </v-list-item-title>
           </v-list-item-content>
         </v-list-item> 
         </v-list>
       </v-navigation-drawer>
     
-  </div>
 </template>
 
 <script>
@@ -50,12 +52,12 @@
       // { title: 'Dashboard', icon: 'mdi-view-dashboard', view: '/' },
       { title: 'Tansações', icon: 'mdi-magnify', view: '/viewAction' },
       // { title: 'Calendário', icon: 'mdi-calendar', view: './viewCalendar' },
-      { title: 'Equipamentos', icon: 'mdi-calendar', view: './viewMachine' },
-      { title: 'Equipe', icon: 'mdi-calendar', view: './viewTeam' },
-      { title: 'Planos mestres', icon: 'mdi-calendar', view: './viewMplan' },
+      { title: 'Equipamentos', icon: 'mdi-calendar', view: '/viewMachine' },
+      { title: 'Equipe', icon: 'mdi-calendar', view: '/viewTeam' },
+      { title: 'Planos mestres', icon: 'mdi-calendar', view: '/viewMplan' },
       // { title: 'Ferramentas', icon: 'mdi-tools', view: './viewTools' },
-      { title: 'Configurações', icon: 'mdi-cog', view: './viewConfig' },
-      { title: 'About', icon: 'mdi-help-box', view: './viewAbout' },
+      { title: 'Configurações', icon: 'mdi-cog', view: '/viewConfig' },
+      { title: 'About', icon: 'mdi-help-box', view: '/viewAbout' },
     ],
   })
 }

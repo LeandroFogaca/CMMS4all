@@ -1,11 +1,11 @@
 <template>
-<div>
-    <v-app-bar>
+  <v-app-bar
+   app
+   absolut
+  >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
       <v-toolbar-title>Application</v-toolbar-title>
-    </v-app-bar>
-</div>
+  </v-app-bar>
 </template>
 
 <script>

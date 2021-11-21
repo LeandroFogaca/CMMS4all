@@ -1,5 +1,8 @@
 <template>
-  <v-footer padless>
+  <v-footer 
+  padless
+  app
+  >
     <v-col
       class="text-center"
       cols="12"

@@ -6,13 +6,18 @@ import '../src/backend/index';
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 var path = require('path');
+var index = "./index.HTML"
+
+
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } },
 ]);
 
-async function createWindow() {
+
+
+async function createWindow(arg) {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 1200,
@@ -37,7 +42,7 @@ async function createWindow() {
   } else {
     createProtocol('app');
     // Load the index.html when not in development
-    win.loadURL('app://./index.html');
+    win.loadURL('app://'+arg);
   }
 }
 
@@ -68,7 +73,7 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString());
     }
   }
-  createWindow();
+  createWindow(index);
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -85,3 +90,18 @@ if (isDevelopment) {
     });
   }
 }
+
+
+
+
+
+
+const {ipcMain} = require('electron');
+// var path = require('path');
+
+ipcMain.on('tobackend', (e, arg)=> {
+    console.log(arg)
+
+    createWindow(arg)
+    e.reply('tobackend', 'pong')
+})
